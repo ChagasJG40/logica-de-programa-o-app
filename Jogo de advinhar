@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhar o Número</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .emoji {
+            font-size: 4em;
+            margin: 20px 0;
+        }
+        
+        #mensagem {
+            font-size: 1.3em;
+            color: #333;
+            margin: 20px 0;
+            min-height: 60px;
+            font-weight: bold;
+        }
+        
+        input {
+            font-size: 2em;
+            padding: 15px;
+            width: 150px;
+            border: 3px solid #667eea;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        button {
+            font-size: 1.5em;
+            padding: 15px 40px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        #tentativas {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 20px;
+        }
+        
+        .explicacao {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        
+        .explicacao h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Adivinhe o Número! 🎮</h1>
+        <p style="font-size: 1.2em;">Pensei em um número entre 1 e 50...</p>
+        
+        <div class="emoji" id="emoji">🤔</div>
+        
+        <div id="mensagem">Tente adivinhar qual é!</div>
+        
+        <input type="number" id="palpite" min="1" max="50" placeholder="?">
+        <br>
+        <button onclick="verificarPalpite()">Tentar!</button>
+        <button onclick="reiniciar()">Novo Jogo</button>
+        
+        <div id="tentativas">Tentativas: 0</div>
+        
+        <div class="explicacao">
+            <h3>💡 Como o computador pensa:</h3>
+            <p><strong>1. GUARDAR</strong> número secreto (você não vê!)</p>
+            <p><strong>2. PERGUNTAR</strong> seu palpite</p>
+            <p><strong>3. SE</strong> acertou → Parabéns! 🎉</p>
+            <p><strong>4. SE NÃO</strong> → Dica e REPETIR</p>
+        </div>
+    </div>
+
+    <script>
+        // PASSO 1: GUARDAR o número secreto
+        let numeroSecreto = Math.floor(Math.random() * 50) + 1;
+        let tentativasFeitas = 0;
+        
+        console.log("Psiu! O número secreto é:", numeroSecreto, "(mas não conta pra ninguém!)");
+        
+        function verificarPalpite() {
+            // PASSO 2: PEGAR o palpite do jogador
+            let palpite = parseInt(document.getElementById('palpite').value);
+            let mensagem = document.getElementById('mensagem');
+            let emoji = document.getElementById('emoji');
+            
+            // Verificar se digitou um número válido
+            if (!palpite || palpite < 1 || palpite > 50) {
+                mensagem.textContent = "Digite um número entre 1 e 50!";
+                emoji.textContent = "❌";
+                return;
+            }
+            
+            tentativasFeitas++;
+            document.getElementById('tentativas').textContent = "Tentativas: " + tentativasFeitas;
+            
+            // PASSO 3 e 4: CONDIÇÕES (SE... ENTÃO...)
+            if (palpite === numeroSecreto) {
+                // ACERTOU!
+                mensagem.textContent = "🎉 PARABÉNS! Você acertou em " + tentativasFeitas + " tentativas!";
+                emoji.textContent = "🏆";
+                mensagem.style.color = "green";
+                document.getElementById('palpite').disabled = true;
+            } 
+            else if (palpite < numeroSecreto) {
+                // Número menor
+                mensagem.textContent = "📈 Tente um número MAIOR!";
+                emoji.textContent = "⬆️";
+                mensagem.style.color = "#ff6b6b";
+            } 
+            else {
+                // Número maior
+                mensagem.textContent = "📉 Tente um número MENOR!";
+                emoji.textContent = "⬇️";
+                mensagem.style.color = "#4ecdc4";
+            }
+            
+            // Limpar o campo
+            document.getElementById('palpite').value = "";
+            document.getElementById('palpite').focus();
+        }
+        
+        function reiniciar() {
+            // REPETIR o jogo!
+            numeroSecreto = Math.floor(Math.random() * 50) + 1;
+            tentativasFeitas = 0;
+            
+            document.getElementById('mensagem').textContent = "Tente adivinhar qual é!";
+            document.getElementById('mensagem').style.color = "#333";
+            document.getElementById('emoji').textContent = "🤔";
+            document.getElementById('palpite').value = "";
+            document.getElementById('palpite').disabled = false;
+            document.getElementById('tentativas').textContent = "Tentativas: 0";
+            
+            console.log("Novo número secreto:", numeroSecreto);
+        }
+        
+        // Permitir apertar Enter para enviar
+        document.getElementById('palpite').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                verificarPalpite();
+            }
+        });
+    </script>
+</body>
+</html>
