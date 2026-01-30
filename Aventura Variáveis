@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura das Variáveis</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+        
+        .variaveis {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+        
+        .variaveis h2 {
+            margin-top: 0;
+            color: #ffd700;
+            text-align: center;
+        }
+        
+        .variavel {
+            background: white;
+            color: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-size: 1.3em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        
+        .variavel.mudou {
+            animation: pulsar 0.5s;
+            background: #ffd700;
+        }
+        
+        @keyframes pulsar {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .variavel-nome {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .variavel-valor {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .historia {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 1.2em;
+            min-height: 100px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        
+        .acoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        button {
+            font-size: 1.2em;
+            padding: 15px 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .explicacao {
+            background: rgba(255,215,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #ffd700;
+        }
+        
+        .explicacao h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+        
+        .codigo {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚔️ Aventura das Variáveis ⚔️</h1>
+        
+        <div class="variaveis">
+            <h2>📦 SUAS VARIÁVEIS (Caixinhas de informação)</h2>
+            
+            <div class="variavel" id="var-vida">
+                <span class="variavel-nome">❤️ VIDA</span>
+                <span class="variavel-valor" id="valor-vida">100</span>
+            </div>
+            
+            <div class="variavel" id="var-moedas">
+                <span class="variavel-nome">💰 MOEDAS</span>
+                <span class="variavel-valor" id="valor-moedas">0</span>
+            </div>
+            
+            <div class="variavel" id="var-forca">
+                <span class="variavel-nome">💪 FORÇA</span>
+                <span class="variavel-valor" id="valor-forca">10</span>
+            </div>
+            
+            <div class="variavel" id="var-nivel">
+                <span class="variavel-nome">⭐ NÍVEL</span>
+                <span class="variavel-valor" id="valor-nivel">1</span>
+            </div>
+        </div>
+        
+        <div class="historia" id="historia">
+            Você é um jovem aventureiro! Sua missão é explorar o mundo e ficar mais forte. 
+            <br><br>
+            <strong>Repare:</strong> Suas variáveis estão ali em cima! Conforme você joga, elas vão MUDAR! 📦
+        </div>
+        
+        <div class="acoes" id="acoes">
+            <button onclick="explorar()">🗺️ Explorar</button>
+            <button onclick="lutar()">⚔️ Lutar</button>
+            <button onclick="descansar()">😴 Descansar</button>
+            <button onclick="treinar()">🏋️ Treinar</button>
+        </div>
+        
+        <div class="explicacao">
+            <h3>💡 O que aconteceu no código:</h3>
+            <div id="codigo-explicacao">
+                <div class="codigo">VIDA = 100</div>
+                <div class="codigo">MOEDAS = 0</div>
+                <div class="codigo">FORÇA = 10</div>
+                <div class="codigo">NÍVEL = 1</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CRIANDO AS VARIÁVEIS =====
+        // Aqui estamos criando as "caixinhas" e colocando valores dentro!
+        
+        let vida = 100;      // Caixinha "vida" começa com 100
+        let moedas = 0;      // Caixinha "moedas" começa com 0
+        let forca = 10;      // Caixinha "força" começa com 10
+        let nivel = 1;       // Caixinha "nível" começa com 1
+        
+        // Função para atualizar a tela com os valores das variáveis
+        function atualizarVariaveis() {
+            document.getElementById('valor-vida').textContent = vida;
+            document.getElementById('valor-moedas').textContent = moedas;
+            document.getElementById('valor-forca').textContent = forca;
+            document.getElementById('valor-nivel').textContent = nivel;
+        }
+        
+        // Função para destacar quando uma variável muda
+        function destacarVariavel(nome) {
+            let elemento = document.getElementById('var-' + nome);
+            elemento.classList.add('mudou');
+            setTimeout(() => {
+                elemento.classList.remove('mudou');
+            }, 500);
+        }
+        
+        // Função para mostrar o que aconteceu no código
+        function mostrarCodigo(texto) {
+            document.getElementById('codigo-explicacao').innerHTML = texto;
+        }
+        
+        function explorar() {
+            // MUDANDO A VARIÁVEL moedas
+            let moedasEncontradas = Math.floor(Math.random() * 10) + 5;
+            moedas = moedas + moedasEncontradas;  // Pega o valor antigo e SOMA!
+            
+            destacarVariavel('moedas');
+            atualizarVariaveis();
+            
+            document.getElementById('historia').innerHTML = 
+                `🗺️ Você explorou e encontrou <strong>${moedasEncontradas} moedas</strong>!<br><br>
+                ✨ Viu a variável MOEDAS mudar? Ela era menor e agora aumentou!`;
+            
+            mostrarCodigo(`
+                <div class="codigo">moedasEncontradas = ${moedasEncontradas}</div>
+                <div class="codigo">moedas = moedas + ${moedasEncontradas}</div>
+                <div class="codigo">// moedas agora é ${moedas}! 💰</div>
+            `);
+        }
+        
+        function lutar() {
+            if (vida <= 20) {
+                document.getElementById('historia').innerHTML = 
+                    `⚠️ Você está muito fraco para lutar! Descanse primeiro!`;
+                return;
+            }
+            
+            // MUDANDO VÁRIAS VARIÁVEIS de uma vez!
+            let dano = Math.floor(Math.random() * 20) + 10;
+            let recompensa = Math.floor(Math.random() * 15) + 10;
+            
+            vida = vida - dano;          // DIMINUI a vida
+            moedas = moedas + recompensa; // AUMENTA as moedas
+            
+            destacarVariavel('vida');
+            destacarVariavel('moedas');
+            atualizarVariaveis();
+            
+            document.getElementById('historia').innerHTML = 
+                `⚔️ Você lutou contra um monstro!<br><br>
+                ❤️ Perdeu <strong>${dano} de vida</strong><br>
+                💰 Ganhou <strong>${recompensa} moedas</strong><br><br>
+                📦 Repare: DUAS variáveis mudaram ao mesmo tempo!`;
+            
+            mostrarCodigo(`
+                <div class="codigo">dano = ${dano}</div>
+                <div class="codigo">vida = vida - ${dano}  // Subtrai!</div>
+                <div class="codigo">moedas = moedas + ${recompensa}  // Soma!</div>
+            `);
+            
+            verificarGameOver();
+        }
+        
+        function descansar() {
+            // MUDANDO a variável vida
+            let cura = 30;
+            vida = vida + cura;  // AUMENTA a vida
+            
+            // Não deixar passar de 100
+            if (vida > 100) {
+                vida = 100;  // MUDA o valor para 100
+            }
+            
+            destacarVariavel('vida');
+            atualizarVariaveis();
+            
+            document.getElementById('historia').innerHTML = 
+                `😴 Você descansou e recuperou <strong>${cura} de vida</strong>!<br><br>
+                💚 Sua variável VIDA aumentou!`;
+            
+            mostrarCodigo(`
+                <div class="codigo">cura = 30</div>
+                <div class="codigo">vida = vida + 30</div>
+                <div class="codigo">SE vida > 100:</div>
+                <div class="codigo">  vida = 100  // Limita no máximo</div>
+            `);
+        }
+        
+        function treinar() {
+            if (moedas < 20) {
+                document.getElementById('historia').innerHTML = 
+                    `💸 Você precisa de 20 moedas para treinar! Você tem apenas ${moedas}.`;
+                return;
+            }
+            
+            // MUDANDO múltiplas variáveis
+            moedas = moedas - 20;  // GASTA moedas
+            forca = forca + 5;     // AUMENTA força
+            
+            // SE ficou forte o suficiente, AUMENTA o nível!
+            if (forca >= 20 && nivel === 1) {
+                nivel = nivel + 1;  // MUDA o nível
+                destacarVariavel('nivel');
+            }
+            
+            destacarVariavel('moedas');
+            destacarVariavel('forca');
+            atualizarVariaveis();
+            
+            document.getElementById('historia').innerHTML = 
+                `🏋️ Você treinou e ficou mais forte!<br><br>
+                💰 Gastou <strong>20 moedas</strong><br>
+                💪 Ganhou <strong>5 de força</strong><br><br>
+                ${forca >= 20 && nivel > 1 ? '⭐ SUBIU DE NÍVEL!' : ''}`;
+            
+            mostrarCodigo(`
+                <div class="codigo">moedas = moedas - 20  // Subtrai</div>
+                <div class="codigo">forca = forca + 5     // Soma</div>
+                <div class="codigo">// Agora: moedas=${moedas}, força=${forca}</div>
+            `);
+        }
+        
+        function verificarGameOver() {
+            if (vida <= 0) {
+                vida = 0;
+                atualizarVariaveis();
+                document.getElementById('historia').innerHTML = 
+                    `💀 <strong>GAME OVER!</strong><br><br>
+                    Sua variável VIDA chegou a 0!<br><br>
+                    <button onclick="reiniciar()">🔄 Jogar de Novo</button>`;
+                document.getElementById('acoes').style.display = 'none';
+            }
+        }
+        
+        function reiniciar() {
+            // RESETANDO todas as variáveis para os valores iniciais!
+            vida = 100;
+            moedas = 0;
+            forca = 10;
+            nivel = 1;
+            
+            atualizarVariaveis();
+            document.getElementById('acoes').style.display = 'flex';
+            document.getElementById('historia').innerHTML = 
+                `🔄 Jogo reiniciado! Todas as variáveis voltaram aos valores iniciais!`;
+            
+            mostrarCodigo(`
+                <div class="codigo">vida = 100</div>
+                <div class="codigo">moedas = 0</div>
+                <div class="codigo">forca = 10</div>
+                <div class="codigo">nivel = 1</div>
+            `);
+        }
+    </script>
+</body>
+</html>
