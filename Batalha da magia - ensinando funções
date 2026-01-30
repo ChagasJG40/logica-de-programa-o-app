@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola de Magia - Funções</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #2c0073 0%, #5a189a 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        .subtitulo {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        
+        .grimorio {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,215,0,0.5);
+        }
+        
+        .grimorio h2 {
+            color: #ffd700;
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .feitico {
+            background: white;
+            color: #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .feitico-nome {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #5a189a;
+            margin-bottom: 5px;
+        }
+        
+        .feitico-codigo {
+            background: #2c0073;
+            color: #00ff88;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            font-size: 0.95em;
+        }
+        
+        .feitico-descricao {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .arena {
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            min-height: 150px;
+            border: 3px solid rgba(255,215,0,0.3);
+        }
+        
+        .arena h2 {
+            color: #ffd700;
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .resultado {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .personagem {
+            text-align: center;
+            font-size: 4em;
+            margin: 20px 0;
+            animation: flutuar 3s ease-in-out infinite;
+        }
+        
+        @keyframes flutuar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin: 5px;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #ffd700;
+        }
+        
+        .stat-valor {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        button {
+            font-size: 1.1em;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        .efeito-magico {
+            animation: brilhar 0.5s;
+        }
+        
+        @keyframes brilhar {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5) drop-shadow(0 0 20px #ffd700); }
+        }
+        
+        .explicacao {
+            background: rgba(255,215,0,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #ffd700;
+        }
+        
+        .explicacao h3 {
+            color: #ffd700;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧙‍♂️ Escola de Magia 🧙‍♀️</h1>
+        <p class="subtitulo">Aprenda a criar FUNÇÕES (Feitiços Mágicos)!</p>
+        
+        <div class="grimorio">
+            <h2>📖 Grimório de Feitiços (Suas Funções)</h2>
+            
+            <div class="feitico">
+                <div class="feitico-nome">✨ curar()</div>
+                <div class="feitico-codigo">
+função curar() {<br>
+&nbsp;&nbsp;vida = vida + 20<br>
+&nbsp;&nbsp;mostrar "💚 Você se curou!"<br>
+}
+                </div>
+                <div class="feitico-descricao">Este feitiço recupera 20 de vida!</div>
+            </div>
+            
+            <div class="feitico">
+                <div class="feitico-nome">⚡ atacar()</div>
+                <div class="feitico-codigo">
+função atacar() {<br>
+&nbsp;&nbsp;dano = 15<br>
+&nbsp;&nbsp;inimigo = inimigo - dano<br>
+&nbsp;&nbsp;mostrar "⚔️ Você causou " + dano + " de dano!"<br>
+}
+                </div>
+                <div class="feitico-descricao">Este feitiço causa 15 de dano no inimigo!</div>
+            </div>
+            
+            <div class="feitico">
+                <div class="feitico-nome">🔮 superAtaque(poder)</div>
+                <div class="feitico-codigo">
+função superAtaque(poder) {<br>
+&nbsp;&nbsp;dano = poder * 2<br>
+&nbsp;&nbsp;inimigo = inimigo - dano<br>
+&nbsp;&nbsp;mostrar "💥 Super ataque! " + dano + " de dano!"<br>
+}
+                </div>
+                <div class="feitico-descricao">Este feitiço recebe um NÚMERO e causa dano em dobro!</div>
+            </div>
+            
+            <div class="feitico">
+                <div class="feitico-nome">🌟 fortalecer(quantidade)</div>
+                <div class="feitico-codigo">
+função fortalecer(quantidade) {<br>
+&nbsp;&nbsp;vida = vida + quantidade<br>
+&nbsp;&nbsp;mana = mana + quantidade<br>
+&nbsp;&nbsp;mostrar "🌟 Você ficou mais forte!"<br>
+}
+                </div>
+                <div class="feitico-descricao">Este feitiço aumenta vida E mana pela quantidade que você escolher!</div>
+            </div>
+        </div>
+        
+        <div class="arena">
+            <h2>⚔️ Arena de Batalha</h2>
+            
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-label">❤️ SUA VIDA</div>
+                    <div class="stat-valor" id="vida">100</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">💙 SUA MANA</div>
+                    <div class="stat-valor" id="mana">50</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">👹 INIMIGO</div>
+                    <div class="stat-valor" id="inimigo">80</div>
+                </div>
+            </div>
+            
+            <div class="personagem">🧙‍♂️ VS 👹</div>
+            
+            <div class="botoes">
+                <button onclick="usarCurar()">✨ Usar curar()</button>
+                <button onclick="usarAtacar()">⚡ Usar atacar()</button>
+                <button onclick="usarSuperAtaque()">🔮 Usar superAtaque(10)</button>
+                <button onclick="usarFortalecer()">🌟 Usar fortalecer(15)</button>
+            </div>
+            
+            <div class="resultado" id="resultado">
+                Escolha um feitiço para usar! Cada botão CHAMA uma função! 🎯
+            </div>
+        </div>
+        
+        <div class="explicacao">
+            <h3>💡 Como Funções Funcionam:</h3>
+            <p><strong>1. CRIAR a função</strong> - É como escrever a receita do feitiço no grimório</p>
+            <p><strong>2. CHAMAR a função</strong> - É como lançar o feitiço! Você só diz o nome: curar()</p>
+            <p><strong>3. PARÂMETROS</strong> - Algumas funções recebem números entre parênteses, tipo: superAtaque(10)</p>
+            <p><strong>4. REUTILIZAR</strong> - Você pode usar o mesmo feitiço quantas vezes quiser!</p>
+            <br>
+            <p>🎯 <strong>A mágica:</strong> Você escreve o código UMA VEZ, mas pode usar INFINITAS VEZES!</p>
+        </div>
+    </div>
+
+    <script>
+        // ========== CRIANDO AS VARIÁVEIS ==========
+        let vida = 100;
+        let mana = 50;
+        let inimigo = 80;
+        
+        // ========== CRIANDO AS FUNÇÕES (FEITIÇOS) ==========
+        
+        // Função 1: SEM parâmetros (sempre faz a mesma coisa)
+        function curar() {
+            vida = vida + 20;
+            if (vida > 100) vida = 100;  // Não passa de 100
+            atualizarStats();
+            mostrarMensagem("✨ Você usou <strong>curar()</strong>!<br>💚 Recuperou 20 de vida!");
+            mostrarCodigo("curar()", "vida = vida + 20");
+        }
+        
+        // Função 2: SEM parâmetros
+        function atacar() {
+            let dano = 15;
+            inimigo = inimigo - dano;
+            atualizarStats();
+            mostrarMensagem("⚡ Você usou <strong>atacar()</strong>!<br>⚔️ Causou " + dano + " de dano no inimigo!");
+            mostrarCodigo("atacar()", "dano = 15<br>inimigo = inimigo - 15");
+            verificarVitoria();
+        }
+        
+        // Função 3: COM parâmetro (recebe um número)
+        function superAtaque(poder) {
+            let dano = poder * 2;  // Usa o número que você passou!
+            inimigo = inimigo - dano;
+            mana = mana - 10;
+            atualizarStats();
+            mostrarMensagem("🔮 Você usou <strong>superAtaque(" + poder + ")</strong>!<br>💥 Causou " + dano + " de dano! (gastou 10 de mana)");
+            mostrarCodigo("superAtaque(10)", "poder = 10<br>dano = poder * 2<br>dano = " + dano);
+            verificarVitoria();
+        }
+        
+        // Função 4: COM parâmetro que afeta MÚLTIPLAS variáveis
+        function fortalecer(quantidade) {
+            vida = vida + quantidade;
+            mana = mana + quantidade;
+            if (vida > 100) vida = 100;
+            atualizarStats();
+            mostrarMensagem("🌟 Você usou <strong>fortalecer(" + quantidade + ")</strong>!<br>💪 Ganhou +" + quantidade + " de vida e mana!");
+            mostrarCodigo("fortalecer(15)", "quantidade = 15<br>vida = vida + 15<br>mana = mana + 15");
+        }
+        
+        // ========== FUNÇÕES AUXILIARES ==========
+        
+        function atualizarStats() {
+            document.getElementById('vida').textContent = vida;
+            document.getElementById('mana').textContent = mana;
+            document.getElementById('inimigo').textContent = inimigo;
+            
+            // Efeito visual
+            document.querySelector('.stats').classList.add('efeito-magico');
+            setTimeout(() => {
+                document.querySelector('.stats').classList.remove('efeito-magico');
+            }, 500);
+        }
+        
+        function mostrarMensagem(texto) {
+            document.getElementById('resultado').innerHTML = texto;
+        }
+        
+        function mostrarCodigo(funcao, codigo) {
+            let codigoExplicacao = document.querySelector('.explicacao');
+            codigoExplicacao.innerHTML = `
+                <h3>💡 O que aconteceu quando você chamou ${funcao}:</h3>
+                <div style="background: #2c0073; color: #00ff88; padding: 15px; border-radius: 10px; font-family: 'Courier New', monospace;">
+                    ${codigo}
+                </div>
+                <p style="margin-top: 15px;">✨ Viu? Você só <strong>CHAMOU</strong> a função, e ela executou todo o código que estava dentro dela!</p>
+            `;
+        }
+        
+        function verificarVitoria() {
+            if (inimigo <= 0) {
+                inimigo = 0;
+                atualizarStats();
+                mostrarMensagem("🎉 <strong>VITÓRIA!</strong> 🎉<br><br>Você derrotou o inimigo!<br><br><button onclick='reiniciar()'>🔄 Nova Batalha</button>");
+            }
+        }
+        
+        // ========== FUNÇÕES QUE CHAMAM OUTRAS FUNÇÕES ==========
+        
+        function usarCurar() {
+            curar();  // CHAMANDO a função!
+        }
+        
+        function usarAtacar() {
+            atacar();  // CHAMANDO a função!
+        }
+        
+        function usarSuperAtaque() {
+            if (mana < 10) {
+                mostrarMensagem("❌ Sem mana suficiente! Você precisa de 10 de mana.");
+                return;
+            }
+            superAtaque(10);  // CHAMANDO a função COM parâmetro!
+        }
+        
+        function usarFortalecer() {
+            fortalecer(15);  // CHAMANDO a função COM parâmetro!
+        }
+        
+        function reiniciar() {
+            vida = 100;
+            mana = 50;
+            inimigo = 80;
+            atualizarStats();
+            mostrarMensagem("🔄 Nova batalha começou! Use seus feitiços (funções) com sabedoria!");
+            mostrarCodigo("reiniciar()", "vida = 100<br>mana = 50<br>inimigo = 80");
+        }
+    </script>
+</body>
+</html>
